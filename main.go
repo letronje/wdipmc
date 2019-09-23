@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/davecgh/go-spew/spew"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/letronje/wdipmc/carparkimport"
-	"github.com/letronje/wdipmc/updateavailability"
+	"github.com/letronje/wdipmc/store/carparkstore"
 )
 
 const port = 80
@@ -32,7 +30,12 @@ func main() {
 	//
 	// r.Run(fmt.Sprintf(":%d", port))
 
-	carparkimport.Import("hdb-carpark-information.csv")
-	err := updateavailability.Update()
-	fmt.Println(err)
+	// carparkimport.Import("hdb-carpark-information.csv")
+	// err := updateavailability.Update()
+	// fmt.Println(err)
+
+	carparkstore.Init()
+	defer carparkstore.Close()
+
+	spew.Dump(carparkstore.ClosestCarparks(1.3275, 103.8657)[1])
 }

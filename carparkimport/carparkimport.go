@@ -27,7 +27,7 @@ func Import(path string) {
 
 	for _, row := range rows {
 		latitude, longitude := svy21.ToLatLon(row.YCoord, row.XCoord)
-		carparkstore.AddCarpark(&carparkstore.Carpark{
+		carparkstore.Add(&carparkstore.Carpark{
 			Number:    row.Number,
 			Address:   row.Address,
 			Latitude:  latitude,

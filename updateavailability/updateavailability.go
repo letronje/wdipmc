@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/letronje/wdipmc/store/carparkstore"
 )
 
@@ -26,10 +25,19 @@ func Update() error {
 	carparkstore.Init()
 	defer carparkstore.Close()
 
-	spew.Dump(updates)
+	fmt.Println(len(updates))
+	notFound := 0
 	for _, update := range updates {
-		carparkstore.UpdateCarparkAvailability(update.Number, update.LotsAvailable, update.TotalLots)
+		err := carparkstore.UpdateAvailability(update.Number, update.LotsAvailable, update.TotalLots)
+		if err != nil {
+			//pp.Println(update)
+			fmt.Println(err)
+			//break
+			notFound++
+		}
 	}
+
+	fmt.Println(notFound)
 
 	return nil
 }
