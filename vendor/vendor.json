@@ -3,6 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
+			"path": "appengine/cloudsql",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "qlEzrgKgIkh7y0ePm9BNo1cNdXo=",
 			"path": "github.com/gin-contrib/sse",
 			"revision": "43f0f29dbd2b3f0feeebff91fd9cda22db296938",
@@ -41,16 +45,40 @@
 			"versionExact": "v1.3.0"
 		},
 		{
+			"checksumSHA1": "P3Irru4RjWFI9sqUB41xwmyf5XM=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "6c79a37b2e06d0297e8a76a70b747f72bdfa8338",
+			"revisionTime": "2019-09-17T09:31:45Z"
+		},
+		{
 			"checksumSHA1": "C8nYObwbo2oyODQbIT83lY37ajM=",
 			"path": "github.com/golang/protobuf/proto",
 			"revision": "1680a479a2cfb3fa22b972af7e36d0a0fde47bf8",
 			"revisionTime": "2019-09-20T23:43:18Z"
 		},
 		{
+			"checksumSHA1": "iqeSAF7imnVsW+iqLqf6kkYn1VU=",
+			"path": "github.com/jinzhu/inflection",
+			"revision": "f5c5f50e6090ae76a29240b61ae2a90dd810112e",
+			"revisionTime": "2019-06-03T04:28:36Z"
+		},
+		{
 			"checksumSHA1": "hNqq14LFOpVJ6hCs+OTAEKrWUkk=",
 			"path": "github.com/json-iterator/go",
 			"revision": "819acad769e54806c920726ac93537ba4e2c22ad",
 			"revisionTime": "2019-09-23T06:02:24Z"
+		},
+		{
+			"checksumSHA1": "W55U5Nln2fJo6l3iJECVR4MmQ3M=",
+			"path": "github.com/k0kubun/pp",
+			"revision": "b20d3da80efaecd224c0a49b0f5594444128f1a0",
+			"revisionTime": "2019-07-19T14:57:53Z"
+		},
+		{
+			"checksumSHA1": "/KGI1De8nUqeoQYACqHTWqeW9Lc=",
+			"path": "github.com/mattn/go-colorable",
+			"revision": "388941e3ea99c461d2bc2747eaf27741b6dda096",
+			"revisionTime": "2019-08-18T02:26:42Z"
 		},
 		{
 			"checksumSHA1": "C3Xbt5Nq5Wez3B5cyi8vQlVkP1g=",
@@ -81,6 +109,12 @@
 			"path": "golang.org/x/sys/unix",
 			"revision": "0a153f010e6963173baba2306531d173aa843137",
 			"revisionTime": "2019-09-21T19:27:54Z"
+		},
+		{
+			"checksumSHA1": "LiyXfqOzaeQ8vgYZH3t2hUEdVTw=",
+			"path": "google.golang.org/appengine/cloudsql",
+			"revision": "c71d63e301d75423acb410203c747cad31e9a5e7",
+			"revisionTime": "2019-09-19T21:55:17Z"
 		},
 		{
 			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",
