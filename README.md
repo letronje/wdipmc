@@ -10,6 +10,7 @@ Env var `CARPARK_CSV` is expected to contain the path of the csv file with carpa
 Example:
 
 `export CARPARK_DSN="root:@/wdipmc?charset=utf8&parseTime=True&loc=Local"`
+
 `CARPARK_CSV=hdb-carpark-information.csv go run cmd/importcarparks/main.go`
 
 `> Carparks after import: 2113`
@@ -30,7 +31,7 @@ Run `go run server.go` to start the api server.
 
 ## How are `nearest` carparks found ?
 
-Using MySQL's `ST_Distance_Sphere` function which `Returns the mimimum spherical distance between two points on a sphere(earth)`
+Using MySQL's `ST_Distance_Sphere` function which `Returns the spherical distance between two points on a sphere(earth)`
 
 Available from MySQL 5.7.6 onwards
 
