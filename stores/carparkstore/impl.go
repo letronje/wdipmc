@@ -11,18 +11,13 @@ type storeImpl struct {
 	db *gorm.DB
 }
 
-func (s *storeImpl) Init(db *gorm.DB) error {
+func (s *storeImpl) init(db *gorm.DB) error {
 	s.db = db
-	// var err error
-	// s.db, err = gorm.Open("mysql", dsn)
-	// if err != nil {
-	// 	return err
-	// }
 	s.db.AutoMigrate(&Carpark{})
 	return nil
 }
 
-func (s *storeImpl) Close() error {
+func (s *storeImpl) close() error {
 	err := s.db.Close()
 	if err != nil {
 		return err
@@ -56,6 +51,6 @@ func (s *storeImpl) NearestAvailable(latitude float64, longitude float64, page i
 
 func New(db *gorm.DB) Store {
 	impl := storeImpl{}
-	_ = impl.Init(db)
+	_ = impl.init(db)
 	return &impl
 }

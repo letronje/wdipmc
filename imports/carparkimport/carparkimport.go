@@ -3,8 +3,8 @@ package carparkimport
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/letronje/wdipmc/csv/carparkscsv"
+	"github.com/letronje/wdipmc/libs/svy21"
 	"github.com/letronje/wdipmc/stores/carparkstore"
-	"github.com/letronje/wdipmc/svy21"
 )
 
 func Import(path string, db *gorm.DB) (int, error) {
