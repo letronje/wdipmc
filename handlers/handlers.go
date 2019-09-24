@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"fmt"
@@ -6,20 +6,11 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/letronje/wdipmc/store/carparkstore"
+	"github.com/letronje/wdipmc/stores/carparkstore"
 )
 
-const port = 80
-
-func main() {
-	carparkstore.Init()
-	defer carparkstore.Close()
-
-	r := gin.Default()
-
-	// Get user value
-	r.GET("/carparks/nearest", func(c *gin.Context) {
+func NearestCarParksHandler(store carparkstore.Store) func(ctx *gin.Context) {
+	return func(c *gin.Context) {
 		latitudeStr := c.Query("latitude")
 		if latitudeStr == "" {
 			c.JSON(http.StatusBadRequest, gin.H{
@@ -73,7 +64,12 @@ func main() {
 			return
 		}
 
-		carparks := carparkstore.NearestAvailable(latitude, longitude, page, pagesize)
+		carparks, err := store.NearestAvailable(latitude, longitude, page, pagesize)
+		if err != nil {
+			fmt.Printf("error fetching nearest available carparks for (%f, %f) \n", latitude, longitude)
+			c.Status(http.StatusInternalServerError)
+			return
+		}
 
 		response := []gin.H{}
 		for _, carpark := range carparks {
@@ -87,16 +83,6 @@ func main() {
 		}
 
 		c.JSON(http.StatusOK, response)
-	})
+	}
 
-	r.Run(fmt.Sprintf(":%d", port))
-
-	// carparkimport.Import("hdb-carpark-information.csv")
-	// err := updateavailability.Update()
-	// fmt.Println(err)
-	//
-	// carparkstore.Init()
-	// defer carparkstore.Close()
-	//
-	// spew.Dump(carparkstore.NearestAvailable(1.3275, 103.8657)[1])
 }
