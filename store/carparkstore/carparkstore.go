@@ -10,12 +10,12 @@ import (
 
 type Carpark struct {
 	gorm.Model
-	Number        string `gorm:"primary_key;unique_index"`
-	Address       string
-	Latitude      float64
-	Longitude     float64
-	TotalLots     int
-	AvailableLots int
+	Number        string  `gorm:"primary_key;unique_index"`
+	Address       string  `gorm:"not null"`
+	Latitude      float64 `gorm:"not null"`
+	Longitude     float64 `gorm:"not null"`
+	TotalLots     int     `gorm:"not null"`
+	AvailableLots int     `gorm:"not null;index:availableLots"`
 }
 
 var db *gorm.DB
@@ -54,9 +54,9 @@ func UpdateAvailability(number string, lotsAvailable int, totalLots int) error {
 	return nil
 }
 
-func ClosestCarparks(latitude float64, longitude float64) []Carpark {
+func NearestAvailable(latitude float64, longitude float64, page int, pagesize int) []Carpark {
 	orderBy := fmt.Sprintf("st_distance_sphere(point(%f, %f), point(longitude, latitude)) asc", longitude, latitude)
 	carparks := []Carpark{}
-	db.Where("available_lots > 0").Order(orderBy).Limit(10).Find(&carparks)
+	db.Where("available_lots > 0").Order(orderBy).Offset(pagesize * (page - 1)).Limit(pagesize).Find(&carparks)
 	return carparks
 }
